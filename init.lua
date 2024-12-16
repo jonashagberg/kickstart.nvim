@@ -200,6 +200,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Bind § to <Esc> in insert mode
 vim.keymap.set('i', '§', '<Esc>')
 
+-- Cycle through copilot suggestions
+-- vim.keymap.set('i', '<C-i>', '<Plug>(copilot-next)')
+-- vim.keymap.set('i', '<C-o>', '<Plug>(copilot-previous)')
+-- vim.g.copilot_no_tab_map = false
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -935,6 +940,24 @@ require('lazy').setup({
   },
   {
     'tpope/vim-fugitive',
+  },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary',
+    dependencies = {
+      { 'github/copilot.vim' }, -- or zbirenbaum/copilot.lua
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
+    build = 'make tiktoken', -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    'm4xshen/hardtime.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = {},
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
