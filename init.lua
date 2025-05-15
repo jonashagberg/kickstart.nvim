@@ -952,7 +952,27 @@ require('lazy').setup({
     },
     build = 'make tiktoken', -- Only on MacOS or Linux
     opts = {
+      prompts = {
+        Rename = {
+          prompt = 'Please rename the variable correctly in given selection based on context',
+          selection = function(source)
+            local select = require 'CopilotChat.select'
+            return select.visual(source)
+          end,
+        },
+      },
       -- See Configuration section for options
+    },
+    keys = {
+      { '<leader>zc', ':CopilotChat<CR>', mode = 'n', desc = 'Chat with Copilot ' },
+      { '<leader>ze', ':CopilotChatExplain<CR>', mode = 'v', desc = 'Explain Code' },
+      { '<leader>zr', ':CopilotChatReview<CR>', mode = 'v', desc = 'Review Code' },
+      { '<leader>zo', ':CopilotChatOptimize<CR>', mode = 'v', desc = 'Optimize Code' },
+      { '<leader>zd', ':CopilotChatDocs<CR>', mode = 'v', desc = 'Generate Docs' },
+      { '<leader>zt', ':CopilotChatTests<CR>', mode = 'v', desc = 'Generate Tests' },
+      { '<leader>zm', ':CopilotChatCommit<CR>', mode = 'n', desc = 'Generate Commit Message' },
+      { '<leader>zs', ':CopilotChatCommit<CR>', mode = 'v', desc = 'Generate Commit for Selection' },
+      { '<leader>zn', ':CopilotChatRename<CR>', mode = 'v', desc = 'Rename Variable' },
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
